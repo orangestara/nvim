@@ -1,12 +1,24 @@
 -- 键位映射
 
-local opt = {noremap = true, silent = true}
-local gmap = vim.api.nvim_set_keymap
-local bmap = vim.api.nvim_buf_set_keymap
-
 -- 设置 leader 键位空格
-gmap("", "<Space>", "<Nop>", opt)
+vim.keymap.set("n", "<Space>", "<Nop>", {noremap=true, silent=true})
 vim.g.mapleader = " "
+
+local mapping = {}
+
+mapping.register = function(range, group_name, bufnr)
+    local group_keymap = mapping[range][group_name]
+    for _, key_map in ipairs(group_keymap) do
+        local options = {}
+        if bufnr then
+            options.buffer = bufnr
+        end
+        for _, key_opts in ipairs(vim.split(key_map[4], "|", true)) do
+            options[key_opts] = true
+        end
+        vim.keymap.set(key_map[1], key_map[2], key_map[3], options)
+    end
+end
 
 -- Modes
 --  normal_mode = "n"
@@ -16,27 +28,31 @@ vim.g.mapleader = " "
 --  term_mode = "t"
 --  command_mode = "c"
 
-mapping = {
-    -- basic
-    {"n", "<Esc>", ":nohlsearch<cr>"},
-    {"n", "<C-u>", "10k"},
-    {"n", "<C-d>", "10j"},
-    {"n", "H", "^"},
-    {"n", "L", "$"},
-    {"n", "<M-k>", "<cmd>res +1<cr>"},
-    {"n", "<M-j>", "<cmd>res -1<cr>"},
-    {"n", "<M-h>", "<cmd>vertical res -1<cr>"},
-    {"n", "<M-l>", "<cmd>vertical res +1<cr>"},
-    {"i", "jj", "<Esc>"},
-    {"i", "<M-k>", "<Up>"},
-    {"i", "<M-j>", "<Down>"},
-    {"i", "<M-h>", "<Left>"},
-    {"i", "<M-l>", "<Right>"},
-    {"v", "H", "^"},
-    {"v", "L", "$"}
+mapping.global = {
+    basic = {
+        {{"n"}, "<Esc>", ":nohlsearch<cr>", "noremap|silent"},
+        {{"n"}, "<C-u>", "10k", "noremap|silent"},
+        {{"n"}, "<C-d>", "10j", "noremap|silent"},
+        {{"n"}, "<M-k>", "<cmd>res +1<cr>", "noremap|silent"},
+        {{"n"}, "<M-j>", "<cmd>res -1<cr>", "noremap|silent"},
+        {{"n"}, "<M-h>", "<cmd>vertical res -1<cr>", "noremap|silent"},
+        {{"n"}, "<M-l>", "<cmd>vertical res +1<cr>", "noremap|silent"},
+        {{"i"}, "jj", "<Esc>", "noremap|silent"},
+        {{"i", "c", "t"}, "<m-k>", "<up>", "noremap"},
+        {{"i", "c", "t"}, "<m-j>", "<down>", "noremap"},
+        {{"i", "c", "t"}, "<m-h>", "<left>", "noremap"},
+        {{"i", "c", "t"}, "<m-l>", "<right>", "noremap"},
+    }
 }
 
+mapping.plugin = {
+    lsp_signature = {
+        toggle_key = "<C-j>"
+    }
+}
 
-for _, keymap in ipairs(mapping) do
-    gmap(keymap[1], keymap[2], keymap[3], opt)
+for group_name, _ in ipairs(mapping.global) do
+    mapping.register("global", group_name, nil)
 end
+
+return mapping
