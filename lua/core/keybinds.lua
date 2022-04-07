@@ -74,6 +74,10 @@ mapping.global = {
             end,
             "noremap|silent|expr"
         }
+    },
+    nvim_tree = {
+        {{"n"}, "<leader>1", "<cmd>NvimTreeToggle<cr>", "noremap|silent"},
+        {{"n"}, "<leader>fc", "<cmd>NvimTreeFindFile<cr>", "noremap|silent"}
     }
 }
 
