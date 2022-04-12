@@ -44,8 +44,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/Users/daiyinlong/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/Users/daiyinlong/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/Users/daiyinlong/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/Users/daiyinlong/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/Users/daiyinlong/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/Users/daiyinlong3/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/Users/daiyinlong3/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/Users/daiyinlong3/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/Users/daiyinlong3/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/daiyinlong3/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -69,163 +69,53 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["copilot.vim"] = {
-    config = { "require('conf/copilot')" },
-    loaded = true,
-    path = "/Users/daiyinlong/.local/share/nvim/site/pack/packer/start/copilot.vim",
-    url = "https://github.com/github/copilot.vim"
-  },
-  fd = {
-    load_after = {},
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/Users/daiyinlong/.local/share/nvim/site/pack/packer/opt/fd",
-    url = "https://github.com/sharkdp/fd"
-  },
   ["filetype.nvim"] = {
     loaded = true,
-    path = "/Users/daiyinlong/.local/share/nvim/site/pack/packer/start/filetype.nvim",
+    path = "/Users/daiyinlong3/.local/share/nvim/site/pack/packer/start/filetype.nvim",
     url = "https://github.com/nathom/filetype.nvim"
   },
   ["impatient.nvim"] = {
-    after = { "vimcdoc", "nvim-web-devicons", "nvim-scrollbar", "ripgrep", "persisted.nvim", "nvim-ts-rainbow", "lsp_signature.nvim", "plenary.nvim", "fd", "vim-illuminate" },
+    after = { "nvim-web-devicons" },
     loaded = true,
     only_config = true
   },
-  ["lsp_signature.nvim"] = {
-    config = { "require('conf/lsp_signature')" },
-    load_after = {},
-    loaded = true,
-    needs_bufread = false,
-    path = "/Users/daiyinlong/.local/share/nvim/site/pack/packer/opt/lsp_signature.nvim",
-    url = "https://github.com/ray-x/lsp_signature.nvim"
-  },
-  ["nvim-scrollbar"] = {
-    config = { "require('conf/nvim-scrollbar')" },
-    load_after = {},
-    loaded = true,
-    needs_bufread = false,
-    path = "/Users/daiyinlong/.local/share/nvim/site/pack/packer/opt/nvim-scrollbar",
-    url = "https://github.com/petertriho/nvim-scrollbar"
-  },
   ["nvim-tree.lua"] = {
-    commands = { "NvimTreeToggle", "NvimTreeFindFile" },
-    config = { "require('conf/nvim-tree')" },
+    config = { "\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19conf.nvim-tree\frequire\0" },
     load_after = {},
-    loaded = false,
+    loaded = true,
     needs_bufread = false,
-    only_cond = false,
-    path = "/Users/daiyinlong/.local/share/nvim/site/pack/packer/opt/nvim-tree.lua",
+    path = "/Users/daiyinlong3/.local/share/nvim/site/pack/packer/opt/nvim-tree.lua",
     url = "https://github.com/kyazdani42/nvim-tree.lua"
-  },
-  ["nvim-ts-rainbow"] = {
-    load_after = {},
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/Users/daiyinlong/.local/share/nvim/site/pack/packer/opt/nvim-ts-rainbow",
-    url = "https://github.com/p00f/nvim-ts-rainbow"
   },
   ["nvim-web-devicons"] = {
     after = { "nvim-tree.lua" },
     load_after = {},
     loaded = true,
     needs_bufread = false,
-    path = "/Users/daiyinlong/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
+    path = "/Users/daiyinlong3/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,
-    path = "/Users/daiyinlong/.local/share/nvim/site/pack/packer/start/packer.nvim",
+    path = "/Users/daiyinlong3/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
-  },
-  ["persisted.nvim"] = {
-    config = { "require('conf/persisted')" },
-    load_after = {},
-    loaded = true,
-    needs_bufread = false,
-    path = "/Users/daiyinlong/.local/share/nvim/site/pack/packer/opt/persisted.nvim",
-    url = "https://github.com/olimorris/persisted.nvim"
-  },
-  ["plenary.nvim"] = {
-    load_after = {},
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/Users/daiyinlong/.local/share/nvim/site/pack/packer/opt/plenary.nvim",
-    url = "https://github.com/nvim-lua/plenary.nvim"
-  },
-  ripgrep = {
-    load_after = {},
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/Users/daiyinlong/.local/share/nvim/site/pack/packer/opt/ripgrep",
-    url = "https://github.com/BurntSushi/ripgrep"
-  },
-  ["vim-illuminate"] = {
-    config = { "require('conf/vim-illuminate')" },
-    load_after = {},
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/Users/daiyinlong/.local/share/nvim/site/pack/packer/opt/vim-illuminate",
-    url = "https://github.com/RRethy/vim-illuminate"
-  },
-  vimcdoc = {
-    load_after = {},
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/Users/daiyinlong/.local/share/nvim/site/pack/packer/opt/vimcdoc",
-    url = "https://github.com/yianwillis/vimcdoc"
   }
 }
 
 time([[Defining packer_plugins]], false)
 -- Config for: impatient.nvim
 time([[Config for impatient.nvim]], true)
-require('conf/impatient')
+try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19conf.impatient\frequire\0", "config", "impatient.nvim")
 time([[Config for impatient.nvim]], false)
--- Config for: copilot.vim
-time([[Config for copilot.vim]], true)
-require('conf/copilot')
-time([[Config for copilot.vim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
-vim.cmd [[ packadd lsp_signature.nvim ]]
-
--- Config for: lsp_signature.nvim
-require('conf/lsp_signature')
-
 vim.cmd [[ packadd nvim-web-devicons ]]
-vim.cmd [[ packadd persisted.nvim ]]
+vim.cmd [[ packadd nvim-tree.lua ]]
 
--- Config for: persisted.nvim
-require('conf/persisted')
-
-vim.cmd [[ packadd nvim-scrollbar ]]
-
--- Config for: nvim-scrollbar
-require('conf/nvim-scrollbar')
+-- Config for: nvim-tree.lua
+try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19conf.nvim-tree\frequire\0", "config", "nvim-tree.lua")
 
 time([[Sequenced loading]], false)
-
--- Command lazy-loads
-time([[Defining lazy-load commands]], true)
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NvimTreeFindFile lua require("packer.load")({'nvim-tree.lua'}, { cmd = "NvimTreeFindFile", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NvimTreeToggle lua require("packer.load")({'nvim-tree.lua'}, { cmd = "NvimTreeToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-time([[Defining lazy-load commands]], false)
-
-vim.cmd [[augroup packer_load_aucmds]]
-vim.cmd [[au!]]
-  -- Event lazy-loads
-time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufNewFile * ++once lua require("packer.load")({'vimcdoc', 'ripgrep', 'nvim-ts-rainbow', 'plenary.nvim', 'fd', 'vim-illuminate'}, { event = "BufNewFile *" }, _G.packer_plugins)]]
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'vimcdoc', 'ripgrep', 'nvim-ts-rainbow', 'plenary.nvim', 'fd', 'vim-illuminate'}, { event = "BufRead *" }, _G.packer_plugins)]]
-time([[Defining lazy-load event autocommands]], false)
-vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)
