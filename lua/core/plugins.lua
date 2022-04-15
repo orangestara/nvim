@@ -1,4 +1,4 @@
-local utils = require("utils")
+local utils = require("utils.api")
 local fn = vim.fn
 
 -- Automatically install packer
@@ -71,6 +71,11 @@ return packer.startup(function(use)
     }
 
 end)
+
+-- 插件参数说明
+-- load_file：加载自定义配置文件，默认路径conf/xxx.lua
+-- disable: Mark a plugin as inactive
+-- after: Specifies plugins to load before this plugin
 
 -- ========== plugins =============
 --local packer_install_plugins = {
@@ -216,9 +221,9 @@ end)
 --                else
 --                    file_name = string.match(name, "/([%w-_]+).?")
 --                end
---                local require_path = utils.path.join("conf", file_name)
---                local config_path = utils.path.join(vim.fn.stdpath("config"), "lua", require_path .. ".lua")
---                if utils.path.exists(config_path) then
+--                local require_path = api.path.join("conf", file_name)
+--                local config_path = api.path.join(vim.fn.stdpath("config"), "lua", require_path .. ".lua")
+--                if api.path.is_exists(config_path) then
 --                    plugin.config = "require('" .. require_path .. "')"
 --                else
 --                    vim.notify(
@@ -236,15 +241,4 @@ end)
 --    end
 --})
 --
----- 实时生效配置，自动执行:PackerCompile
-----local packer_user_config = vim.api.nvim_create_augroup("packer_user_config", {clear = true})
-----
-----vim.api.nvim_create_autocmd(
-----    {"BufWritePost"},
-----    {
-----        pattern = {"plugins.lua"},
-----        command = "source <afile> | PackerCompile",
-----        group = packer_user_config
-----    }
-----)
 --return packer
