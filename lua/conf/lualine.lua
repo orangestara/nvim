@@ -1,7 +1,11 @@
 -- https://github.com/nvim-lualine/lualine.nvim
 -- https://github.com/SmiteshP/nvim-gps
 
-local gps = require("nvim-gps")
+local status_ok1, gps = pcall(require, "nvim-gps")
+local status_ok2, lualine = pcall(require, "lualine")
+if not (status_ok1 and status_ok2) then
+    return
+end
 
 gps.setup()
 
@@ -33,7 +37,7 @@ local function get_persisting()
     end
 end
 
-require("lualine").setup(
+lualine.setup(
     {
         options = {
             icons_enabled = true,

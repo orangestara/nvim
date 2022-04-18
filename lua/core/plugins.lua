@@ -41,204 +41,28 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
-    use {
-        "wbthomason/packer.nvim",
-        disable = false
-    }
-    use {
-        "lewis6991/impatient.nvim",
-        disable = false,
-        config = function()
-            require("conf.impatient")
-        end
-    }
-    use {
-        "nathom/filetype.nvim",
-        disable = false
-    }
-    use {
-        "kyazdani42/nvim-web-devicons",
-        disable = false,
-        after = {"impatient.nvim"}
-    }
-    use {
-        "kyazdani42/nvim-tree.lua",
-        disable = false,
-        config = function()
-            require("conf.nvim-tree")
-        end,
-        after = {"nvim-web-devicons"}
-    }
+    use {"wbthomason/packer.nvim"}
+    use {"lewis6991/impatient.nvim", config=[[require("conf.impatient")]]}
+    use {"nathom/filetype.nvim"}
+    use {"nvim-lua/plenary.nvim", after={"impatient.nvim"}, event = {"BufRead", "BufNewFile"}}
+    use {"kyazdani42/nvim-web-devicons", after={"impatient.nvim"}}
+    use {"kyazdani42/nvim-tree.lua", config=[[require("conf.nvim-tree")]], after={"nvim-web-devicons"}}
+    use {"kevinhwang91/nvim-hlslens", config=[[require("conf.nvim-hlslens")]], after={"impatient.nvim"}}
+    use {"windwp/nvim-autopairs", config=[[require("conf.nvim-autopairs")]], event={"InsertEnter"}, after={"impatient.nvim"}}
 
+    -- functions
+    use {"ethanholz/nvim-lastplace", config=[[require("conf.nvim-lastplace")]], event={"BufRead", "BufNewFile"}, after={"impatient.nvim"}}
+    -- themes
+    use {"catppuccin/nvim", as="catppuccin", config=[[require("conf.catppuccin")]]}
+    use {"lukas-reineke/indent-blankline.nvim", config=[[require("conf.indent-blankline")]], after={"impatient.nvim"}}
+    use {"SmiteshP/nvim-gps", after={"nvim-treesitter"}}
+    use {"p00f/nvim-ts-rainbow", after={"impatient.nvim"}, event = {"BufRead", "BufNewFile"}}
+    use {"lewis6991/gitsigns.nvim", config=[[require("conf.gitsigns")]], after={"nvim-treesitter", "plenary.nvim"}}
+    use {"nvim-lualine/lualine.nvim", config=[[require("conf.lualine")]], after={"nvim-web-devicons", "nvim-gps", "gitsigns.nvim"}}
+    use {"nvim-treesitter/nvim-treesitter", config=[[require("conf.nvim-treesitter")]], after={"impatient.nvim"}, run=":TSUpdate", event={"BufRead", "BufNewFile"}}
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if packer_bootstrap then
+        require("packer").sync()
+    end
 end)
-
--- 插件参数说明
--- load_file：加载自定义配置文件，默认路径conf/xxx.lua
--- disable: Mark a plugin as inactive
--- after: Specifies plugins to load before this plugin
-
--- ========== plugins =============
---local packer_install_plugins = {
---    -----------
---    -- basic --
---    -----------
---    -- Have packer manage itself
---    ["wbthomason/packer.nvim"] = {
---        load_file = false,
---        disable = false
---    },
---    ["lewis6991/impatient.nvim"] = {
---        load_file = true,
---        disable = false
---    },
---    ["nathom/filetype.nvim"] = {
---        load_file = false,
---        disable = false
---    },
---    ["github/copilot.vim"] = {
---        load_file = true,
---        disable = false
---    },
---    ["kyazdani42/nvim-web-devicons"] = {
---        load_file = false,
---        disable = false,
---        after = {"impatient.nvim"}
---    },
---    --["onsails/lspkind-nvim"] = {
---    --    load_file = true,
---    --    disable = false,
---    --    after = {"impatient.nvim"}
---    --},
---    --["rcarriga/nvim-notify"] = {
---    --    load_file = true,
---    --    disable = false,
---    --    after = {"impatient.nvim"}
---    --},
---    ["ray-x/lsp_signature.nvim"] = {
---        load_file = true,
---        disable = false,
---        after = {"impatient.nvim"}
---    },
---    ["yianwillis/vimcdoc"] = {
---        load_file = false,
---        disable = false,
---        after = {"impatient.nvim"},
---        event = {"BufRead", "BufNewFile"}
---    },
---    ["olimorris/persisted.nvim"] = {
---        load_file = true,
---        disable = false,
---        after = {"impatient.nvim"}
---    },
---    ["nvim-lua/plenary.nvim"] = {
---        load_file = false,
---        disable = false,
---        after = {"impatient.nvim"},
---        event = {"BufRead", "BufNewFile"}
---    },
---    ["BurntSushi/ripgrep"] = {
---        load_file = false,
---        disable = false,
---        after = {"impatient.nvim"},
---        event = {"BufRead", "BufNewFile"}
---    },
---    ["sharkdp/fd"] = {
---        load_file = false,
---        disable = false,
---        after = {"impatient.nvim"},
---        event = {"BufRead", "BufNewFile"}
---    },
---
---    ------------
---    -- themes --
---    ------------
---    ["petertriho/nvim-scrollbar"] = {
---        load_file = true,
---        disable = false,
---        after = {"impatient.nvim"}
---    },
---    ["catppuccin/nvim"] = {
---        as = "catppuccin",
---        load_file = true,
---        disable = false,
---        after = {"nvim-scrollbar"}
---    },
---    --["Mofiqul/vscode.nvim"] = {
---    --    load_file = true,
---    --    disable = false,
---    --    after = {"nvim-scrollbar"}
---    --},
---    ["RRethy/vim-illuminate"] = {
---        load_file = true,
---        disable = false,
---        after = {"impatient.nvim"},
---        event = {"BufRead", "BufNewFile"}
---    },
---    ["p00f/nvim-ts-rainbow"] = {
---        load_file = false,
---        disable = false,
---        after = {"impatient.nvim"},
---        event = {"BufRead", "BufNewFile"}
---    },
---    --["nvim-treesitter/nvim-treesitter"] = {
---    --    load_file = true,
---    --    disable = false,
---    --    after = {"impatient.nvim"},
---    --    event = {"BufRead", "BufNewFile"}
---    --},
---    --["SmiteshP/nvim-gps"] = {
---    --    load_file = false,
---    --    disable = false,
---    --    after = {"nvim-treesitter"}
---    --},
---    --["lewis6991/gitsigns.nvim"] = {
---    --    load_file = true,
---    --    disable = false,
---    --    after = {"nvim-treesitter", "plenary.nvim"}
---    --},
---    --["nvim-lualine/lualine.nvim"] = {
---    --    load_file = true,
---    --    disable = false,
---    --    after = {"nvim-web-devicons", "nvim-gps", "gitsigns.nvim"}
---    --},
---    ["kyazdani42/nvim-tree.lua"] = {
---        load_file = true,
---        disable = false,
---        cmd = {"NvimTreeToggle", "NvimTreeFindFile"},
---        after = {"nvim-web-devicons"}
---    }
---}
---
---
---packer.startup({
---    function(use)
---        for name, opts in pairs(packer_install_plugins) do
---            local plugin = vim.tbl_extend("force", {name}, opts)
---            if opts.load_file then
---                local file_name = ""
---                if opts.as then
---                    file_name = opts.as
---                else
---                    file_name = string.match(name, "/([%w-_]+).?")
---                end
---                local require_path = api.path.join("conf", file_name)
---                local config_path = api.path.join(vim.fn.stdpath("config"), "lua", require_path .. ".lua")
---                if api.path.is_exists(config_path) then
---                    plugin.config = "require('" .. require_path .. "')"
---                else
---                    vim.notify(
---                        "Missing config file for " .. name .. ": " .. config_path,
---                        "error",
---                        {title = "packer"}
---                    )
---                end
---            end
---            use(plugin)
---        end
---        if packer_bootstrap then
---            require("packer").sync()
---        end
---    end
---})
---
---return packer

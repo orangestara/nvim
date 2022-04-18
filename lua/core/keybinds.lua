@@ -78,6 +78,14 @@ mapping.global = {
     nvim_tree = {
         {{"n"}, "<leader>1", "<cmd>NvimTreeToggle<cr>", "noremap|silent"},
         {{"n"}, "<leader>fc", "<cmd>NvimTreeFindFile<cr>", "noremap|silent"}
+    },
+    nvim_hlslens = {
+        {{"n"}, "n", [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], "noremap|silent"},
+        {{"n"}, "N", [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], "noremap|silent"},
+        {{"n"}, "*", [[*<cmd>lua require('hlslens').start()<CR>]], "noremap|silent"},
+        {{"n"}, "#", [[#<cmd>lua require('hlslens').start()<cr>]], "noremap|silent"},
+        {{"n"}, "g*", [[g*<cmd>lua require('hlslens').start()<cr>]], "noremap|silent"},
+        {{"n"}, "g#", [[g#<cmd>lua require('hlslens').start()<cr>]], "noremap|silent"}
     }
 }
 

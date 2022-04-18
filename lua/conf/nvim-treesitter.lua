@@ -1,10 +1,13 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter
--- https://github.com/p00f/nvim-ts-rainbow
--- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
 
-local mapping = require("core.keybinds")
+local status_ok, treesitter = pcall(require, "nvim-treesitter.configs")
+if not status_ok then
+    return
+end
 
-require("nvim-treesitter.configs").setup(
+--local mapping = require("core.keybinds")
+
+treesitter.setup(
     {
         -- installed highlight support sources
         ensure_installed = "maintained",
@@ -13,6 +16,7 @@ require("nvim-treesitter.configs").setup(
         -- highlight related
         highlight = {
             enable = true,
+            disable = { "" },  -- list of language that will be disabled
             -- disable built-in regex highlighting
             additional_vim_regex_highlighting = false
         },
@@ -20,19 +24,21 @@ require("nvim-treesitter.configs").setup(
         incremental_selection = {
             enable = true,
             keymaps = {
-                init_selection = mapping.plugin.nvim_treesitter.init_selection,
-                node_incremental = mapping.plugin.nvim_treesitter.node_incremental,
-                node_decremental = mapping.plugin.nvim_treesitter.node_decremental,
-                scope_incremental = mapping.plugin.nvim_treesitter.scope_incremental
+                init_selection = "<CR>",
+                node_incremental = "<CR>",
+                node_decremental = "<BS>",
+                scope_incremental = "<TAB>"
             }
         },
         -- indent have bug in python
         indent = {
-            enable = false
+            enable = true,
+            disable = {"yaml"}
         },
         -- nvim-ts-context-commentstring
         context_commentstring = {
-            enable = true
+            enable = true,
+            enable_autocmd = false
         },
         -- nvim-ts-rainbow
         rainbow = {
