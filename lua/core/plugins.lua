@@ -54,6 +54,7 @@ return packer.startup(function(use)
     use {"ethanholz/nvim-lastplace", config=[[require("conf.nvim-lastplace")]], event={"BufRead", "BufNewFile"}, after={"impatient.nvim"}}
     use {"Pocco81/AutoSave.nvim", config=[[require("conf.AutoSave")]], after={"impatient.nvim"}}
     use {"folke/which-key.nvim", config=[[require("conf.which-key")]], after={"impatient.nvim"}}
+    use {"phaazon/hop.nvim", branch="v1", config=[[require("conf.hop")]]}
     -- themes
     use {"catppuccin/nvim", as="catppuccin", config=[[require("conf.catppuccin")]]}
     use {"lukas-reineke/indent-blankline.nvim", config=[[require("conf.indent-blankline")]], after={"impatient.nvim"}}
@@ -62,6 +63,12 @@ return packer.startup(function(use)
     use {"lewis6991/gitsigns.nvim", config=[[require("conf.gitsigns")]], after={"nvim-treesitter", "plenary.nvim"}}
     use {"nvim-lualine/lualine.nvim", config=[[require("conf.lualine")]], after={"nvim-web-devicons", "nvim-gps", "gitsigns.nvim"}}
     use {"nvim-treesitter/nvim-treesitter", config=[[require("conf.nvim-treesitter")]], after={"impatient.nvim"}, run=":TSUpdate", event={"BufRead", "BufNewFile"}}
+
+    -- lsp
+    use {"neovim/nvim-lspconfig", after={"impatient.nvim"}}
+    use {"stevearc/aerial.nvim", config=[[require("conf.aerial")]], after={"nvim-lspconfig", "nvim-web-devicons"}}
+    use {"hrsh7th/cmp-nvim-lsp", after={"nvim-lspconfig", "nvim-web-devicons"}}
+    use {"williamboman/nvim-lsp-installer", config=[[require("conf.nvim-lsp-installer")]], after={"aerial.nvim", "cmp-nvim-lsp"}}
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then

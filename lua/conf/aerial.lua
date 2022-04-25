@@ -1,8 +1,12 @@
 -- https://github.com/stevearc/.nvim
 
-local mapping = require("core.mapping")
+local status_ok, aerial = pcall(require, "aerial")
+if not status_ok then
+    vim.notify("aerial module not found")
+    return
+end
 
-require("aerial").setup(
+aerial.setup(
     {
         min_width = 30,
         -- backends = {"lsp", "treesitter", "markdown"}
@@ -26,7 +30,7 @@ require("aerial").setup(
         },
         update_events = "TextChanged,InsertLeave",
         on_attach = function(bufnr)
-            mapping.register("buffer", "aerial", bufnr)
+            --mapping.register("buffer", "aerial", bufnr)
         end
     }
 )

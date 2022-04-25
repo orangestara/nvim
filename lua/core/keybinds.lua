@@ -60,6 +60,17 @@ keymap({"i", "n"}, "<M-k>", "<Esc>:m .-2<CR>==gi", opts)
 keymap({"n"}, "<leader>1", ":NvimTreeToggle<CR>", opts)
 keymap({"n"}, "<leader>f", ":NvimTreeFindFile<CR>", opts)
 
+-- hop
+keymap({"n", "v"}, "ss", ":HopWord<CR>", opts)
+keymap({"n", "v"}, "sl", ":HopLine<CR>", opts)
+keymap({"n", "v"}, "sc", ":HopChar1<CR>", opts)
+
+lsp_keymap = function(bufnr)
+    opts.buffer = bufnr
+    keymap({"n"}, "gd", ":lua vim.lsp.buf.declaration()<CR>", opts)
+end
+
+
 global = {
     nvim_tree = {
         {{"n"}, "<leader>1", "<cmd>NvimTreeToggle<cr>", "noremap|silent"},
