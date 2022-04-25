@@ -1,7 +1,5 @@
 -- https://github.com/kyazdani42/nvim-tree.lua
 
--- add a backslash / after the directory
-vim.g.nvim_tree_add_trailing = 1
 
 vim.g.nvim_tree_icons = {
     default = " ",
@@ -29,8 +27,25 @@ vim.g.nvim_tree_icons = {
     }
 }
 
-require("nvim-tree").setup(
+local status_ok, nvim_tree = pcall(require, "nvim-tree")
+if not status_ok then
+    vim.notify("nvim-tree not found!")
+    return
+end
+
+nvim_tree.setup(
     {
+        disable_netrw = true,
+        hijack_netrw = true,
+        open_on_setup = false,
+        ignore_ft_on_setup = {
+            "startify",
+            "dashboard",
+            "alpha",
+            "startup",
+        },
+        hijack_cursor = true,
+        update_cwd = true,
         view = {
             width = 30,
             height = 30,
@@ -38,7 +53,7 @@ require("nvim-tree").setup(
             auto_resize = true
         },
         diagnostics = {
-            enable = false,
+            enable = true,
             icons = {
                 hint = "",
                 info = "",
@@ -47,7 +62,7 @@ require("nvim-tree").setup(
             }
         },
         git = {
-            enable = false,
+            enable = true,
             ignore = true,
             timeout = 500
         }

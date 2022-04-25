@@ -49,9 +49,12 @@ return packer.startup(function(use)
     use {"kyazdani42/nvim-tree.lua", config=[[require("conf.nvim-tree")]], after={"nvim-web-devicons"}}
     use {"kevinhwang91/nvim-hlslens", config=[[require("conf.nvim-hlslens")]], after={"impatient.nvim"}}
     use {"windwp/nvim-autopairs", config=[[require("conf.nvim-autopairs")]], event={"InsertEnter"}, after={"impatient.nvim"}}
+    use {"rcarriga/nvim-notify", config=[[require("conf.nvim-notify")]], after={"impatient.nvim"}}
 
     -- functions
     use {"ethanholz/nvim-lastplace", config=[[require("conf.nvim-lastplace")]], event={"BufRead", "BufNewFile"}, after={"impatient.nvim"}}
+    use {"Pocco81/AutoSave.nvim", config=[[require("conf.AutoSave")]], after={"impatient.nvim"}}
+    use {"folke/which-key.nvim", config=[[require("conf.which-key")]], after={"impatient.nvim"}}
     -- themes
     use {"catppuccin/nvim", as="catppuccin", config=[[require("conf.catppuccin")]]}
     use {"lukas-reineke/indent-blankline.nvim", config=[[require("conf.indent-blankline")]], after={"impatient.nvim"}}

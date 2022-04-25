@@ -1,6 +1,12 @@
 -- https://github.com/Pocco81/AutoSave.nvim
 
-require("autosave").setup(
+local status_ok, autosave = pcall(require, "autosave")
+if not status_ok then
+    vim.notify("autosave module not found!")
+    return
+end
+
+autosave.setup(
     {
         enabled = true,
         -- auto save events

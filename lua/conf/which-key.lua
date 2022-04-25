@@ -1,6 +1,11 @@
 -- https://github.com/folke/which-key.nvim
 
-require("which-key").setup(
+local status_ok, which_key = pcall(require, "which-key")
+if not status_ok then
+    vim.notify("which-key module not found!")
+end
+
+which_key.setup(
     {
         plugins = {
             spelling = {
