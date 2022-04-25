@@ -65,10 +65,10 @@ return packer.startup(function(use)
     use {"nvim-treesitter/nvim-treesitter", config=[[require("conf.nvim-treesitter")]], after={"impatient.nvim"}, run=":TSUpdate", event={"BufRead", "BufNewFile"}}
 
     -- lsp
-    use {"neovim/nvim-lspconfig", after={"impatient.nvim"}}
-    use {"stevearc/aerial.nvim", config=[[require("conf.aerial")]], after={"nvim-lspconfig", "nvim-web-devicons"}}
-    use {"hrsh7th/cmp-nvim-lsp", after={"nvim-lspconfig", "nvim-web-devicons"}}
-    use {"williamboman/nvim-lsp-installer", config=[[require("conf.nvim-lsp-installer")]], after={"aerial.nvim", "cmp-nvim-lsp"}}
+    --use {"neovim/nvim-lspconfig", after={"impatient.nvim"}}
+    --use {"stevearc/aerial.nvim", config=[[require("conf.aerial")]], after={"nvim-lspconfig", "nvim-web-devicons"}}
+    --use {"hrsh7th/cmp-nvim-lsp", after={"nvim-lspconfig", "nvim-web-devicons"}}
+    --use {"williamboman/nvim-lsp-installer", config=[[require("conf.nvim-lsp-installer")]], after={"aerial.nvim", "cmp-nvim-lsp"}}
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
