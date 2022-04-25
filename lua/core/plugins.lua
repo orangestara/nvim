@@ -1,4 +1,3 @@
-local utils = require("utils.api")
 local fn = vim.fn
 
 -- Automatically install packer

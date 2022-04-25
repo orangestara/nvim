@@ -1,80 +1,66 @@
 -- 键位映射
 
--- 设置 leader 键位空格
-vim.keymap.set("", "<Space>", "<Nop>", {noremap=true, silent=true})
+local opts = {noremap=true, silent=true}
+local keymap = vim.keymap.set
+
+-- Remap space as leader key
+keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 
-local mapping = {}
+-- Modes:
+-- normal_mode = "n"
+-- insert_mode = "i"
+-- visual_mode = "v"
+-- visual_block_mode = "x"
+-- term_mode = "t"
+-- command_mode = "c"
 
-mapping.register = function(range, group_name, bufnr)
-    local group_keymap = mapping[range][group_name]
-    for _, key_map in ipairs(group_keymap) do
-        local options = {}
-        if bufnr then
-            options.buffer = bufnr
-        end
-        for _, key_opts in ipairs(vim.split(key_map[4], "|", true)) do
-            options[key_opts] = true
-        end
-        vim.keymap.set(key_map[1], key_map[2], key_map[3], options)
-    end
-end
+-- key shotcuts:
+-- <C-h> = "Ctrl + h"
+-- <M-h> = "Option/Alt + h"
 
--- Modes
---  normal_mode = "n"
---  insert_mode = "i"
---  visual_mode = "v"
---  visual_block_mode = "x"
---  term_mode = "t"
---  command_mode = "c"
+-- Normal --
+-- Better window navigation
+keymap({"n"}, "<C-h>", "<C-w>h", opts)
+keymap({"n"}, "<C-j>", "<C-w>j", opts)
+keymap({"n"}, "<C-k>", "<C-w>k", opts)
+keymap({"n"}, "<C-l>", "<C-w>l", opts)
 
-mapping.global = {
-    basic = {
-        {{"n"}, "<Esc>", ":nohlsearch<cr>", "noremap|silent"},
-        {{"n"}, "<C-u>", "10k", "noremap|silent"},
-        {{"n"}, "<C-d>", "10j", "noremap|silent"},
-        {{"n"}, "<M-k>", "<cmd>res +1<cr>", "noremap|silent"},
-        {{"n"}, "<M-j>", "<cmd>res -1<cr>", "noremap|silent"},
-        {{"n"}, "<M-h>", "<cmd>vertical res -1<cr>", "noremap|silent"},
-        {{"n"}, "<M-l>", "<cmd>vertical res +1<cr>", "noremap|silent"},
-        {{"i"}, "jj", "<Esc>", "noremap|silent"},
-        {{"i", "c", "t"}, "<M-k>", "<up>", "noremap"},
-        {{"i", "c", "t"}, "<M-j>", "<down>", "noremap"},
-        {{"i", "c", "t"}, "<M-h>", "<left>", "noremap"},
-        {{"i", "c", "t"}, "<M-l>", "<right>", "noremap"},
-        {
-            {"n", "x"},
-            "j",
-            function()
-                return vim.v.count > 0 and "j" or "gj"
-            end,
-            "noremap|silent|expr"
-        },
-        {
-            {"n", "x"},
-            "k",
-            function()
-                return vim.v.count > 0 and "k" or "gk"
-            end,
-            "noremap|silent|expr"
-        },
-        {
-            {"n", "x"},
-            "H",
-            function()
-                return vim.v.count > 0 and "^" or "g^"
-            end,
-            "noremap|silent|expr"
-        },
-        {
-            {"n", "x"},
-            "L",
-            function()
-                return vim.v.count > 0 and "$" or "g$"
-            end,
-            "noremap|silent|expr"
-        }
-    },
+-- go to 10k or 10j
+keymap({"n"}, "<C-u>", "10k", opts)
+keymap({"n"}, "<C-d>", "10j", opts)
+
+-- Resize window
+keymap({"n"}, "<M-w>", ":resize -2<CR>", opts)
+keymap({"n"}, "<M-s>", ":resize +2<CR>", opts)
+keymap({"n"}, "<M-a>", ":vertical resize -2<CR>", opts)
+keymap({"n"}, "<M-d>", ":vertical resize +2<CR>", opts)
+
+-- go to line head and tail
+keymap({"n", "v"}, "H", "^", opts)
+keymap({"n", "v"}, "L", "$", opts)
+
+-- no highlight
+keymap({"n"}, "<Esc>", ":nohlsearch<CR>", opts)
+
+-- quick back insert mode
+keymap({"i"}, "jj", "<Esc>", opts)
+
+-- save buffer
+keymap({"n"}, "<leader>w", ":w<CR>", opts)
+-- exit cur window
+keymap({"n"}, "<leader>q", ":q<CR>", opts)
+
+-- move text up and down
+keymap({"i", "n"}, "<M-j>", "<Esc>:m .+1<CR>==gi", opts)
+keymap({"i", "n"}, "<M-k>", "<Esc>:m .-2<CR>==gi", opts)
+
+-- Plugins --
+-- nvim-tree
+keymap({"n"}, "<leader>1", ":NvimTreeToggle<CR>", opts)
+keymap({"n"}, "<leader>f", ":NvimTreeFindFile<CR>", opts)
+
+global = {
     nvim_tree = {
         {{"n"}, "<leader>1", "<cmd>NvimTreeToggle<cr>", "noremap|silent"},
         {{"n"}, "<leader>fc", "<cmd>NvimTreeFindFile<cr>", "noremap|silent"}
@@ -89,12 +75,4 @@ mapping.global = {
     }
 }
 
-mapping.plugin = {
-    lsp_signature = {
-        toggle_key = "<C-j>"
-    }
-}
-for group_name, _ in pairs(mapping.global) do
-    mapping.register("global", group_name, nil)
-end
-return mapping
+
